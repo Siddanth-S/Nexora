@@ -1,6 +1,7 @@
-const server={
-    dev:"http://localhost:3000",
-    prod:"https://nexora-potn.onrender.com"
-}
+let IS_PROD = true;
+
+const server = IS_PROD
+  ? "https://nexora-potn.onrender.com"
+  : "http://localhost:3000";
 
 export default server;
