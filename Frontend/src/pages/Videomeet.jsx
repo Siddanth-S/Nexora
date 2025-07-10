@@ -12,7 +12,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import styles from "../styles/videoComponent.module.css";
 import server from "../environment.js";
 
-const server_url = server;
+const server_url = server.prod;
 var connections = {};
 const peerConfigConnections = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
