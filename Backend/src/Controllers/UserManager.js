@@ -5,17 +5,22 @@ import crypto from 'crypto';
 
 const register=async (req, res) => {
     const { name,username,  password } = req.body;
+    if (!name || !username || !password) {
+        return res.status(httpStatus.BAD_REQUEST).json({ message: 'All fields are required' });
+    }
     try{
         const existingUser= await User.findOne({ username });
         if(existingUser){
-            return res.status(httpStatus.FOUND).json({ message: 'Username already exists' });
+            return res.status(httpStatus.CONFLICT).json({ message: 'Username already exists' });
         }
         const hashedPassword = bcrypt.hashSync(password, 10);
         const user = new User({ name:name, username:username, password: hashedPassword });
         await user.save();
         res.status(httpStatus.CREATED).json({message: 'User registered successfully', user: { name, username } });
     }catch(e){
-        return res.json({message:`Something whent wrong ${e}`}); 
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: `Something went wrong: ${e.message}`,
+        }); 
     }
 }
 
