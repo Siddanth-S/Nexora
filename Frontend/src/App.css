@@ -1,7 +1,7 @@
 .landing-page-container{
   width: 100vw;
   height: 100vh;
-  background-image: url("public/background.jpeg");
+  background-image: url("/background.jpeg");
   background-repeat:no-repeat; ;
   background-size: cover;
 }
